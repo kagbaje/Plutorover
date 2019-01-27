@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Plutorover
 {
-    class Program
+    class Rover
     {
-        static void Main(string[] args)
-        {
-
-        }
+        //position 0,0
+        //direction n.w
+        //movement f b
     }
 }
