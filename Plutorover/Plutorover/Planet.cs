@@ -8,15 +8,7 @@ namespace Plutorover
 {
     class Planet
     {
-        //obstacles
-        private int row, col;
-        private int[,] grid = new int[100, 100];
 
-        public Planet(int row, int col)
-        {
-            row = this.row;
-            col = this.col;
 
-        }
     }
 }

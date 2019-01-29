@@ -1,0 +1,7 @@
+I:\Plutorover\Plutorover\Plutorover\obj\Debug\Plutorover.csprojResolveAssemblyReference.cache
+I:\Plutorover\Plutorover\Plutorover\obj\Debug\Plutorover.csproj.CoreCompileInputs.cache
+I:\Plutorover\Plutorover\Plutorover\bin\Debug\Plutorover.exe.config
+I:\Plutorover\Plutorover\Plutorover\bin\Debug\Plutorover.exe
+I:\Plutorover\Plutorover\Plutorover\bin\Debug\Plutorover.pdb
+I:\Plutorover\Plutorover\Plutorover\obj\Debug\Plutorover.exe
+I:\Plutorover\Plutorover\Plutorover\obj\Debug\Plutorover.pdb
