@@ -13,7 +13,7 @@ namespace Plutorover
 
     {
 
-        Vector north = new Vector(0, 100);
+        Position.Vector north = new Position.Vector(0, 100);
       
         Vector east = new Vector(100, 0);
         
@@ -21,23 +21,22 @@ namespace Plutorover
        
         Vector south = new Vector(0, -100);
 
-       
-        
+        Vector obstruction = new Vector(1, 0);
+
+       Vector obstruction1 = new Vector(1, 1);
+
+
+
 
         static void Main(string[] args)
         {
             Vector rover = new Vector(0, 0);
-           // Backward(rover);
-
+            obstruct(rover);
+        
          
          
         
 
-
-
-
-
-            //need a method that checks for objects, SET OBSTRUCTION 
             //need a method that checks if (WORLD.X > 100 X=-100,WORLD.Y>100 Y=-100 ,WORLD.X<-100 X=100,WORLD.Y<-100, Y=100)
             //need a method for direction
 
@@ -151,5 +150,53 @@ namespace Plutorover
             Direct(right);
             return right;
         }
+
+        public static string Obstruct(Vector rover)
+        {
+            Vector obstruction = new Vector(5, 6);
+            string message;
+
+
+            if (obstruction.x == rover.x && obstruction.y == rover.y)
+            {
+                message = "There is an obstruction";
+                Console.WriteLine("message:{0}", message);
+                Console.ReadKey();
+            }
+            else
+            {
+                message = "No obstruction carry on";
+                Console.WriteLine("message:{0}", message);
+                Console.ReadKey();
+            }
+
+
+            return message;
+        }
+
+
+            public void World (Vector rover)
+            {
+                Vector Posworld = new Vector(100, 100);
+                Vector Negworld = new Vector(-100, -100);
+            if (rover.x > 100)   
+            {
+                rover.x = -99;
+            }
+            else if(rover.y > 100){
+                rover.y = -99;
+
+            }
+            else if (rover.x < -100) { 
+            rover.x = 100;
+             }
+            else if (rover.y < -100)
+            {
+                rover.y = 100;
+            }
+              
+            }
+
     }
+
 }
