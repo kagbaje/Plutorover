@@ -9,43 +9,31 @@ using System.Windows;
 namespace Plutorover
 {
 
-    class Program
+   public class Program
 
     {
 
-        Position.Vector north = new Position.Vector(0, 100);
-      
-        Vector east = new Vector(100, 0);
-        
-        Vector west = new Vector(-100, 0);
-       
-        Vector south = new Vector(0, -100);
-
-        Vector obstruction = new Vector(1, 0);
-
-       Vector obstruction1 = new Vector(1, 1);
 
 
-
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Vector rover = new Vector(0, 0);
-            obstruct(rover);
-        
-         
-         
-        
 
-            //need a method that checks if (WORLD.X > 100 X=-100,WORLD.Y>100 Y=-100 ,WORLD.X<-100 X=100,WORLD.Y<-100, Y=100)
-            //need a method for direction
+
+            Vector run = new Vector(0,2);
+            Left(run);
+            Right(run);
 
 
         }
-
-        public static string Direct(Vector roverdir)
+           
+    
+        /*
+         * @param Vector of rover
+         * returns direction of Rover (N,W,E,S)
+         */ 
+        public static string Direction(Vector rover)
         {
-            String direction;
+            string direction;
 
             Vector north = new Vector(0, 100);
 
@@ -56,147 +44,281 @@ namespace Plutorover
             Vector south = new Vector(0, -100);
 
 
-            if (Vector.AngleBetween(roverdir, north) == 0)
+            if (Vector.AngleBetween(rover, north) == 0)
             {
                 direction = "N";
+                Console.WriteLine("direction = {0}", direction);
+                Console.ReadKey();
+                return direction;
 
             }
-            else if (Vector.AngleBetween(roverdir, south) == 0)
+            else if (Vector.AngleBetween(rover, south) == 0)
             {
                 direction = "S";
+                Console.WriteLine("direction = {0}", direction);
+                Console.ReadKey();
+                return direction;
 
             }
-            else if (Vector.AngleBetween(roverdir, east) == 0)
+            else if (Vector.AngleBetween(rover, east) == 0)
             {
                 direction = "E";
+                Console.WriteLine("direction = {0}", direction);
+                Console.ReadKey();
+                return direction;
+            }
+            else if (Vector.AngleBetween(rover, west) == 0)
+            {
+                direction = "W";
+                Console.WriteLine("direction = {0}", direction);
+                Console.ReadKey();
+                return direction;
             }
             else
             {
-                direction = "W";
+                Console.WriteLine("idk where i'm going");
+                Console.ReadKey();
+                direction = "null";
+                return direction;
 
             }
-            Console.WriteLine("direction = {0}", direction);
-            Console.ReadKey();
-            return direction;
-
+   
 
         }
+
+        /*
+         * @param Vector of rover
+         * Returns new forward direction of rover based on direction
+         * includes world bounds
+         */ 
 
         public static Vector Forward(Vector rover)
         {
-            string direction = "";
-            
-            if (direction == "N")
+
+            int posgrid = 100;
+            int neggrid = -100;
+            bool isObject =  Collision(rover);
+          
+            string direction = Direction(rover);
+           
+            if (!isObject)
             {
-                rover.y++;
-            }
-            else if (direction == "E")
-            {
-                rover.x++;
-            }
-            else if (direction == "W")
-            {
-                rover.x--;
+
+                if (direction == "N")
+                {
+                   
+                    if (rover.y == posgrid)
+                    {
+                        rover.y = -99;
+                    }
+                    else
+                    {
+                        rover.y++;
+                    }
+                   
+                }
+                else if (direction == "E")
+                {
+                    
+                    if (rover.x == posgrid)
+                    {
+                        rover.x = -99;
+                    }
+                    else
+                    {
+                        rover.x++;
+                    }
+                   
+                }
+                else if (direction == "W")
+                {
+                   
+                    if (rover.x == neggrid)
+                    {
+                        rover.x = 99;
+                    }
+                    else
+                    {
+                        rover.x--;
+                    }
+                   
+                }
+                else if (direction == "S")
+                {
+                   
+                    if (rover.y == neggrid)
+                    {
+                        rover.y = 99;
+                    }
+                    else
+                    {
+                        rover.y--;
+                    }
+                  
+                }
+
+               
+                return rover;
             }
             else
             {
-                rover.y--;
+                Console.WriteLine("didnt move forward");
+                Console.ReadKey();
             }
-            Console.WriteLine("direction = {0} direction = {1} direction{2}", rover.x,rover.y, direction);
-             Console.ReadKey();
-            //    return direction;
+        
 
             return rover;
         }
 
+        /*
+         * @param Vector of rover
+         * Returns new backward direction of rover based on direction
+         * includes world bounds
+         */
+ 
         public static Vector Backward(Vector rover)
         {
-            string direction = "";
 
-            if (direction == "N")
-            {
-                rover.y--;
+            int posgrid = 100;
+            int neggrid = -100;
+            bool isObject = Collision(rover);
+            string direction = Direction(rover);
+          
+
+            if ( isObject == false) {
+                
+
+                if (direction == "N")
+                {
+                   
+                    if (rover.y == neggrid)
+                    {
+                        rover.y = 99;
+                    }
+                    else
+                    {
+                        rover.y--;
+                    }
+                   
+                }
+                else if (direction == "E")
+                {
+                
+                    if (rover.x == neggrid)
+                    {
+                        rover.x = 99;
+                    }
+                    else
+                    {
+                        rover.x--;
+                    }
+
+                }
+                else if (direction == "W")
+                {
+                    
+                    if (rover.x == posgrid)
+                    {
+                        rover.x = -99;
+                    }
+                    else
+                    {
+                        rover.x++; ;
+                    }
+
+
+                }
+                else if (direction =="S")
+                {
+                    if (rover.y == posgrid)
+                    {
+                        rover.y = -99;
+                    }
+                    else
+                    {
+                        rover.y++;
+                    }
+
+                  
+                }
+
             }
-            else if (direction == "E")
-            {
-                rover.x--;
-            }
-            else if (direction == "W")
-            {
-                rover.x++;
-            }
-            else
-            {
-                rover.y++;
-            }
-            Console.WriteLine("direction = {0} direction = {1} direction{2}", rover.x, rover.y, direction);
-            Console.ReadKey();
-            //    return direction;
 
             return rover;
         }
+
+        /*
+         * @param Vector of rover
+         * Rotates rover at 90 degrees anticlockwise
+         * 
+         */
+
 
         public static Vector Left(Vector rover)
         {
             Vector left = Vector.Left(rover);
-            Direct(left);
+           
+            left.x = rover.x;
+            left.y = rover.y;
+            
             return left;
         }
 
+
+
+        /*
+         * @param Vector of rover
+         * Rotates rover at 90 degrees clockwise
+         *
+         * 
+         */
+ 
         public static Vector Right(Vector rover)
         {
 
           Vector right = Vector.Right(rover);
-            Direct(right);
+          
+          right.x = rover.x;
+           right.y = rover.y;
+          
+
             return right;
         }
 
-        public static string Obstruct(Vector rover)
+
+        /*
+         * @param Vector of rover
+         * bool that returns based on if vector of rover and obstacle are equal
+         * 
+         * 
+         */
+
+
+
+
+        public static bool Collision(Vector rover)
         {
-            Vector obstruction = new Vector(5, 6);
-            string message;
+            Vector obstacle = new Vector(2,2);
+            bool isObject;
 
-
-            if (obstruction.x == rover.x && obstruction.y == rover.y)
+            if (rover.x == obstacle.x && rover.y == obstacle.y)
             {
-                message = "There is an obstruction";
-                Console.WriteLine("message:{0}", message);
-                Console.ReadKey();
+                isObject = true;
+                
+                
+               
+                
             }
             else
             {
-                message = "No obstruction carry on";
-                Console.WriteLine("message:{0}", message);
-                Console.ReadKey();
-            }
-
-
-            return message;
-        }
-
-
-            public void World (Vector rover)
-            {
-                Vector Posworld = new Vector(100, 100);
-                Vector Negworld = new Vector(-100, -100);
-            if (rover.x > 100)   
-            {
-                rover.x = -99;
-            }
-            else if(rover.y > 100){
-                rover.y = -99;
-
-            }
-            else if (rover.x < -100) { 
-            rover.x = 100;
-             }
-            else if (rover.y < -100)
-            {
-                rover.y = 100;
-            }
+                isObject = false;
               
             }
+          
+            
+            return isObject;
 
+        }
     }
 
 }
